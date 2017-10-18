@@ -7,7 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-
+user = User.create(email: 'test@example.com', password: 'password', password_confirmation: 'password')
+user.save
 
 [
   {
@@ -101,7 +102,8 @@
   }
 
 ].each do |recipe|
-  Recipe.create(
+  puts "recipe " + recipe[:recipe][:label]
+  new_recipe = Recipe.create(
     uri: recipe[:recipe][:uri],
     label: recipe[:recipe][:label],
     image: recipe[:recipe][:image],
@@ -110,5 +112,9 @@
     share_url: recipe[:recipe][:shareAs],
     yield: recipe[:recipe][:yield],
     calories: recipe[:recipe][:calories],
+    user_id: user.id
   )
+  new_recipe.save.to_s
+  puts new_recipe.errors.full_messages
 end
+

@@ -36,8 +36,10 @@ ActiveRecord::Schema.define(version: 20171017003211) do
     t.string "share_url"
     t.integer "yield"
     t.integer "calories"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -50,4 +52,5 @@ ActiveRecord::Schema.define(version: 20171017003211) do
   end
 
   add_foreign_key "ingredients", "recipes"
+  add_foreign_key "recipes", "users"
 end
